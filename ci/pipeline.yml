@@ -35,16 +35,5 @@ jobs:
     file: attendee-service-source/ci/tasks/package.yml
   - put: deploy-attendee-service
     params:
-      manifest: attendee-service/manifest.yml
+      manifest: attendee-service-source/manifest.yml
       path: package-output/attendee-service.jar
-
-- name: smoke_test
-  public: true
-  plan:
-  - get: attendee-service-source
-    trigger: true
-    passed: [deploy]
-  - task: smoke_test
-    file: attendee-service-source/ci/tasks/smoke-test.yml
-    params:
-      ATTENDEE_SERVICE_URL: http://attendee-service-unevadible-thermoscope.apps.cumuluslabs.io  #<---- REPLACE ME
